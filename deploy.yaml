@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: AnimaliaGuard
+  labels:
+    run: AnimaliaGuard
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    run: AnimaliaGuard
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: AnimaliaGuard
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: AnimaliaGuard
+    spec:
+      containers:
+      - name: AnimaliaGuard
+        image: bolax5/animalia-guard:latest
+        imagePullPolicy: always
+        ports:
+        - containerPort: 80
+        - containerPort: 443
