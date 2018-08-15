@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: app/v1
 kind: Service
 metadata:
   name: AnimaliaGuard
@@ -17,7 +17,7 @@ spec:
   selector:
     run: AnimaliaGuard
 ---
-apiVersion: extensions/v1beta1
+apiVersion: app/v1beta1
 kind: Deployment
 metadata:
   name: AnimaliaGuard
